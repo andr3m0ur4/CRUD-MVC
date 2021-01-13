@@ -1,3 +1,5 @@
+<a class="btn btn-primary m-3 modal-ajax" href="/contatos/adicionar">ADICIONAR</a>
+
 <table class="table">
     <tr>
         <th>ID</th>
