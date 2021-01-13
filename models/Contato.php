@@ -16,6 +16,22 @@
             return $array;
         }
 
+        public function obterContato($id)
+        {
+            $array = [];
+
+            $sql = "SELECT * FROM contatos WHERE id = :id";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(':id', $id);
+            $sql->execute();
+
+            if ($sql->rowCount() > 0) {
+                $array = $sql->fetch(PDO::FETCH_OBJ);
+            }
+
+            return $array;
+        }
+
         public function adicionar($nome, $email)
         {
             if (!$this->verificarEmail($email)) {
@@ -29,6 +45,32 @@
             }
 
             return false;
+        }
+
+        public function editar($id, $nome, $email, $email_original)
+        {
+            if ($email != $email_original) {
+                if ($this->verificarEmail($email)) {
+                    return false;
+                }
+            }
+
+            $sql = "UPDATE contatos SET nome = :nome, email = :email WHERE id = :id";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(':nome', $nome);
+            $sql->bindValue(':email', $email);
+            $sql->bindValue(':id', $id);
+            $sql->execute();
+
+            return true;
+        }
+
+        public function excluir($id)
+        {
+            $sql = "DELETE FROM contatos WHERE id = :id";
+            $sql = $this->db->prepare($sql);
+            $sql->bindValue(':id', $id);
+            $sql->execute();
         }
 
         private function verificarEmail($email)

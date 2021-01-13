@@ -14,8 +14,8 @@
             <td><?= $item->nome ?></td>
             <td><?= $item->email ?></td>
             <td>
-                <a class="btn btn-sm btn-primary modal-ajax" href="editar.php?id=<?= $item->id ?>">EDITAR</a>
-                <a class="btn btn-sm btn-primary" href="excluir.php?id=<?= $item->id ?>">EXCLUIR</a>
+                <a class="btn btn-sm btn-primary modal-ajax" href="/contatos/editar/<?= $item->id ?>">EDITAR</a>
+                <a class="btn btn-sm btn-primary" href="/contatos/excluir/<?= $item->id ?>">EXCLUIR</a>
             </td>
         </tr>
     <?php endforeach ?>
