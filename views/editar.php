@@ -4,7 +4,7 @@
     <div class="alert alert-danger">E-mail já existente, tente outro.</div>
 <?php endif ?>
 
-<form method="POST" action="/contatos/salvar/<?= $contato->id ?>" class="m-2 pb-2">
+<form method="POST" action="/contatos/salvar" class="m-2 pb-2">
     <input type="hidden" name="email_original" value="<?= $contato->email ?>">
 
     <div class="form-group">

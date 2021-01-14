@@ -16,7 +16,7 @@
             return $array;
         }
 
-        public function obterContato($id)
+        public function obter($id)
         {
             $array = [];
 

@@ -23,6 +23,8 @@
                 'error' => false
             ];
 
+            session_unset();
+
             if (!empty($_GET['error'])) {
                 $data['error'] = true;
             }
@@ -30,8 +32,10 @@
             $this->loadTemplate('adicionar', $data);
         }
 
-        public function salvar($id = 0)
+        public function salvar()
         {
+            $id = $_SESSION['id'] ?? 0;
+
             if ($id > 0) {
                 if (!empty($_POST['email'])) {
                     $nome = $_POST['nome'];
@@ -76,7 +80,7 @@
                 $contatos = new Contato;
 
                 $data = [
-                    'contato' => $contatos->obterContato($id),
+                    'contato' => $contatos->obter($id),
                     'error' => false
                 ];
 
@@ -84,10 +88,15 @@
                     $data['error'] = true;
                 }
 
-                $this->loadTemplate('editar', $data);
-            } else {
-                header('Location: /');
+                if (isset($data['contato']->id)) {
+                    $_SESSION['id'] = $id;
+
+                    $this->loadTemplate('editar', $data);
+                    exit;
+                }
             }
+            
+            header('Location: /');
         }
 
         public function excluir($id)
